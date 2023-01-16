@@ -1,0 +1,50 @@
+﻿@using Cosmetics_Online_Shop.Models
+@model IEnumerable<CosmeticTypes>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br></br>
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-info">Cosmetic Type List</h2>
+    </div>
+    <div class="col-6 text-end">
+        <a asp-action="Create" class="btn btn-info">&nbsp; New Cosmetic Type</a>
+    </div>
+
+</div>
+<br/>
+<div>
+    <table class="table table-striped border">
+        <tr class="table-info">
+            <th>
+                @Html.DisplayNameFor(c=>c.CosmeticType)
+            </th>
+            <th></th>
+        </tr>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.CosmeticType</td>
+                <partial name="_ButtonPartial" model="@item.Id">
+            </tr>
+        }
+    </table>
+</div>
+
+@section scripts{
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var save = '@TempData["save"]'
+            if(save!=''){
+                alertify.success(save);
+            }
+            var delete = '@TempData["delete"]'
+            if (delete != '') {
+                alertify.error(delete);
+            }
+        })
+    </script>
+}
